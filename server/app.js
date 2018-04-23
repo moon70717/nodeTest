@@ -1,13 +1,19 @@
 const express = require('express');
 const app = express();
 
-var initFunc = function (req, res) {
-    console.log('req =>', req);
-    console.log('res =>', res);
+var initFunc = function (req, res, next) {
+    console.log('initFunc!');
     res.send('hello~');
+    next();
 }
 
-app.post('/',initFunc);
+var initFunc2 = function (req, res) {
+    console.log('initFunc2');
+}
+
+app.post('/', initFunc);
+app.get('/', initFunc);
+app.get('/', initFunc2);
 
 // app.use('/',(req,res,next)=>{
 //     console.log(req.url);
